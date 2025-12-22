@@ -1,0 +1,39 @@
+:root{
+    --primary-color: rgb(0, 184, 159);
+    --primary-color-darker: rgb(0, 121, 105);
+}
+
+body {
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+form {
+    width: 300px;
+}
+input {
+    border-radius: 7px;
+}
+input, button {
+    padding: 10px;
+    width: -webkit-fill-available;
+}
+button {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.form-field {
+    margin-bottom: 10px;
+}
+
+.container {
+    max-width: 640px;
+    margin: 50px auto;
+    background-color: rgb(9, 146, 128);
+    padding: 20px;
+    line-height: 1.5em;
+    border-radius: 10px;
+}
