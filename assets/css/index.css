@@ -5,9 +5,6 @@
 
 body {
     background-color: var(--primary-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
 }
 form {
