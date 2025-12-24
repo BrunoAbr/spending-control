@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="./assets/css/index.css">
-    <link rel="stylesheet" href="./assets/css/global.css">
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>   
+
+    <script src="/firebase-config.js"></script>
+    <script>
+        firebase.initializeApp(window.firebaseConfig);
+    </script>
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
 </head>
 <body class="centralize">
     <section class="container">
@@ -22,7 +29,7 @@
                 <div class="error" id="password-required-error">Senha é obrigatória</div>        
             </div>
             <div>       
-                <button type="button" class="clear" id="recover-password-button" nclick="recoverPassword() disabled="true">Recuperar senha</button>
+                <button type="button" class="clear" id="recover-password-button" onclick="recoverPassword()" disabled="true">Recuperar senha</button>
             </div>
             <div>     
                 <button type="button" class="solid" id="login-button" onclick="login()" disabled="true">Entrar</button>
@@ -30,16 +37,13 @@
             <div>    
                 <button type="button" class="outline" onclick="register()">Registrar</button>
             </div>
-    </section>    
-    <script src="./assets/js/index.js"></script>
-    <script src="loading.js"></script>   
-    <script src="./assets/js/validations.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>
+        </form>    
+    </section>   
 
-    <script type="module">
-        import { firebaseConfig } from './firebase-config.js';
-        firebase.initializeApp(firebaseConfig);
-    </script>
+    
+    <script src="/assets/js/index.js"></script>
+    <script src="loading.js"></script>   
+    <script src="/assets/js/validations.js"></script>
+
 </body>
 </html>

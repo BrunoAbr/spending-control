@@ -6,15 +6,16 @@
     <title>Register</title>
     <link rel="stylesheet" href="/assets/css/global.css">
     <link rel="stylesheet" href="/assets/css/register.css">
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>   
+
+    <script src="/firebase-config.js"></script>
+    <script>
+        firebase.initializeApp(window.firebaseConfig);
+    </script>
     <script src="/assets/js/register.js"></script>
     <script src="/assets/js/validations.js"></script>
     <script src="/loading.js"></script>   
-    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>
-    <script type="module">
-        import { firebaseConfig } from '/firebase-config.js';
-        firebase.initializeApp(firebaseConfig);
-    </script>
 </head>
 <body class="centralize">
     <section class="container">

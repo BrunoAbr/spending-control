@@ -1,3 +1,22 @@
+const form = {
+    email: () => document.getElementById("email"),
+    emailInvalidError: () => document.getElementById("email-invalid-error"),
+    emailRequiredError: () => document.getElementById("email-required-error"),
+    password: () => document.getElementById("password"),
+    passwordRequiredError: () => document.getElementById("password-required-error"),
+    passwordMinLengthError: () => document.getElementById("password-min-length-error"),
+    confirmPassword: () => document.getElementById("confirm-password"),
+    passwordDoesntMatchError: () => document.getElementById("password-doesnt-match-error"),
+    registerButton: () => document.getElementById("register-button")
+}
+
+firebase.auth().onAuthStateChanged(function(user){
+    if (user) {
+        showLoading()
+        window.location.href = "../../pages/home/home.html";
+    }
+})
+
 function onChangeEmail() {
     const email = form.email().value;
     form.emailRequiredError().style.display = email ? "none" : "block";
@@ -70,14 +89,3 @@ function isFormValid() {
     return true;
 }
 
-const form = {
-    email: () => document.getElementById("email"),
-    emailInvalidError: () => document.getElementById("email-invalid-error"),
-    emailRequiredError: () => document.getElementById("email-required-error"),
-    password: () => document.getElementById("password"),
-    passwordRequiredError: () => document.getElementById("password-required-error"),
-    passwordMinLengthError: () => document.getElementById("password-min-length-error"),
-    confirmPassword: () => document.getElementById("confirm-password"),
-    passwordDoesntMatchError: () => document.getElementById("password-doesnt-match-error"),
-    registerButton: () => document.getElementById("register-button")
-}

@@ -1,3 +1,20 @@
+const form = {
+    email: () => document.getElementById('email'),
+    emailRequiredError: () => document.getElementById('email-required-error'),
+    emailInvalidError: () => document.getElementById('email-invalid-error'),
+    loginButton: () => document.getElementById('login-button'),
+    password: () => document.getElementById('password'),
+    passwordRequiredError: () => document.getElementById('password-required-error'),
+    recoverPasswordButton: () => document.getElementById('recover-password-button')
+}
+
+firebase.auth().onAuthStateChanged(function(user){
+    if (user) {
+        showLoading()
+        window.location.href = "pages/home/home.html";
+    }
+})
+
 function onChangeEmail(){
     toggleButtonsDisable();
     toggleEmailErrors();
@@ -66,8 +83,8 @@ function toggleButtonsDisable() {
     const emailValid = isEmailValid();
     form.recoverPasswordButton().disabled = !emailValid;
 
-    const PasswordValid = isPasswordValid();
-    form.loginButton().disabled = !emailValid || !PasswordValid;
+    const passwordValid = isPasswordValid();
+    form.loginButton().disabled = !emailValid || !passwordValid;
 }
 
 function isPasswordValid(){
@@ -79,12 +96,3 @@ function isPasswordValid(){
 }
 
 
-const form = {
-    email: () => document.getElementById('email'),
-    emailRequiredError: () => document.getElementById('email-required-error'),
-    emailInvalidError: () => document.getElementById('email-invalid-error'),
-    loginButton: () => document.getElementById('login-button'),
-    password: () => document.getElementById('password'),
-    passwordRequiredError: () => document.getElementById('password-required-error'),
-    recoverPasswordButton: () => document.getElementById('recover-password-button')
-}
