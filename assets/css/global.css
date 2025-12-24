@@ -1,5 +1,23 @@
+:root{
+    --primary-color: rgb(0, 184, 159);
+    --primary-color-darker: rgb(0, 121, 105);
+}
+
 body {
     margin: 0;
+}
+
+.container {
+    max-width: 640px;
+    margin: 50px auto;
+    background-color: rgb(9, 146, 128);
+    padding: 20px;
+    line-height: 1.5em;
+    border-radius: 10px;
+}
+
+.form-field {
+    margin-bottom: 10px;
 }
 
 .centralize {
@@ -40,6 +58,11 @@ body {
 
 .loading label {
     font-size: 30px;
+}
+
+input, button {
+    padding: 10px;
+    width: -webkit-fill-available;
 }
 
 button:active {
