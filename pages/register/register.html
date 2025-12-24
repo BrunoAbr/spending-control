@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="/assets/css/register.css">
     <script src="/assets/js/register.js"></script>
     <script src="/assets/js/validations.js"></script>
+    <script src="/loading.js"></script>   
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>
+    <script type="module">
+        import { firebaseConfig } from '/firebase-config.js';
+        firebase.initializeApp(firebaseConfig);
+    </script>
 </head>
 <body class="centralize">
     <section class="container">
@@ -40,10 +47,10 @@
                 </div>
             </div>
             <div>
-                <button type="button" class="solid" disabled="true" id="register-button">Registrar</button>
+                <button type="button" class="solid" disabled="true" onclick="register()" id="register-button">Registrar</button>
             </div>
             <div>
-                <button type="button" class="clear"> ← Voltar</button>
+                <button type="button" class="clear" onclick="backToLoginPage()"> ← Voltar</button>
             </div>
         </form>
     </section>    
