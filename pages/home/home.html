@@ -8,20 +8,23 @@
     <link rel="stylesheet" href="/assets/css/home.css">    
     <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>   
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore-compat.js"></script>   
 
     <script src="/firebase-config.js"></script>
     <script>
         firebase.initializeApp(window.firebaseConfig);
     </script>
-    <script src="/assets/js/home.js"></script> 
-    <script src="/assets/js/auth-guard.js"></script>
-    <script src="/loading.js"></script>
 </head>
 <body>
     <header>
         <button type="button" class="clear" onclick="logout()">Logout</button>
     </header>
     <section class="container">
-    </section>    
+        <ol id="transactions"></ol>
+    </section>
+    <button class="fab fixed bottom right">+</button>    
 </body>
+    <script src="/loading.js"></script>
+    <script src="/assets/js/home.js"></script> 
+    <script src="/assets/js/auth-guard.js"></script>
 </html>
