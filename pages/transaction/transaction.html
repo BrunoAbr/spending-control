@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction</title>
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/transaction.css">    
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>   
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore-compat.js"></script>   
+
+    <script src="/firebase-config.js"></script>
+    <script>
+        firebase.initializeApp(window.firebaseConfig);
+    </script>
+</head>
+<body>
+    <header>
+        <button type="button" class="clear" onclick="logout()">Logout</button>
+    </header>
+    <section class="container">
+        <main class="centralize">
+            <form>
+                <div class="form-field">
+                    <div><label>Transação</label></div>
+                    <input type="radio" name="type" checked id="expense">
+                    <label for="expense" >Despesa</label>
+                    <input type="radio" name="type" id="income">
+                    <label for="income" >Receita</label>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div><label>Data da Transação</label></div>
+                    <input type="date">
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div><label>Moeda</label></div>
+                    <select>
+                        <option selected>Real</option>
+                    </select>
+                </div>    
+                <div class="form-field">
+                    <div><label>Valor</label></div>
+                    <input type="number">
+                    </div>
+                </div> 
+                <div class="form-field">
+                    <div><label>Tipo de transação</label></div>
+                    <select>
+                        <option>-- Selecione um tipo de transação --</option>
+                        <option>Acomodação</option>
+                        <option>Alimentação</option>
+                        <option>Outros</option>
+                        <option>Salário</option>
+                        <option>Supermercado</option>
+                        <option>Transporte</option>
+                    </select>
+                </div>    
+                <div class="form-field">
+                    <div><label>Descrição</label></div>
+                    <input type="text">
+                    </div>
+                </div>    
+            <button type="button" class="solid">Salvar</button>     
+            <button type="button" class="clear">Cancelar</button>                                                               
+            </form>
+        </main>
+    </section>
+</body>
+    <script src="/loading.js"></script>
+    <script src="/assets/js/transaction.js"></script> 
+    <script src="/assets/js/auth-guard.js"></script>
+</html>
