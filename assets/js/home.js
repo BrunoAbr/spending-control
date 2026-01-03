@@ -64,5 +64,5 @@ function formatMoney(money) {
 }
 
 function formatDate(date) {
-    return new Date(date).toLocaleDateString('pt-br');
+    return new Date(date).toLocaleDateString('pt-br', {timeZone: 'UTC'});
 }
