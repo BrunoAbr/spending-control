@@ -85,6 +85,7 @@ button.fab {
     border: none;
     font-size: 24px;
     box-shadow: 2px 2px 2px gray;
+    cursor: pointer;
 }
 button.fab.fixed {
     position: fixed;
