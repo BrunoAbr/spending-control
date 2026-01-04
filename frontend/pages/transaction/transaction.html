@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaction</title>
-    <link rel="stylesheet" href="/assets/css/global.css">
-    <link rel="stylesheet" href="/assets/css/transaction.css">    
+    <link rel="stylesheet" href="/frontend/assets/css/global.css">
+    <link rel="stylesheet" href="/frontend/assets/css/transaction.css">    
     <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>   
     <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore-compat.js"></script>   
 
-    <script src="/firebase-config.js"></script>
+    <script src="/frontend/firebase-config.js"></script>
     <script>
         firebase.initializeApp(window.firebaseConfig);
     </script>
@@ -74,12 +74,13 @@
                     </div>
                 </div>    
             <button type="button" class="solid" disabled id="save-button" onclick="saveTransaction()">Salvar</button>     
-            <button type="button" class="clear">Cancelar</button>                                                               
+            <button type="button" class="clear" onclick="cancelTransaction()">Cancelar</button>                                                               
             </form>
         </main>
     </section>
 </body>
-    <script src="/loading.js"></script>
-    <script src="/assets/js/transaction.js"></script> 
-    <script src="/assets/js/auth-guard.js"></script>
+    <script src="/frontend/loading.js"></script>
+    <script src="/frontend/services/transaction.service.js"></script>
+    <script src="/frontend/assets/js/transaction.js"></script> 
+    <script src="/frontend/assets/js/auth-guard.js"></script>
 </html>

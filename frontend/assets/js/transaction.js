@@ -15,10 +15,10 @@ function isNewTransaction() {
 function findTransactionByUid(uid) {
     showLoading();
 
-    firebase.firestore().collection('transactions').doc(uid).get().then(doc => {
+    transactionService.findByUid(uid).then(transaction => {
         hideLoading();
-        if (doc.exists) {
-            fillTransactionScreen(doc.data());
+        if (transaction) {
+            fillTransactionScreen(transaction);
             toggleSaveButtonDisable();
         } else {
             alert("Documento não encontrado");
@@ -65,7 +65,7 @@ function saveTransaction() {
 
 function save(transaction) {
     showLoading();
-    firebase.firestore().collection('transactions').add(transaction).then (() => {
+    transactionService.save(transaction).then (() => {
         hideLoading();
         window.location.href = "../home/home.html";
     }). catch(() => {
@@ -79,7 +79,7 @@ function save(transaction) {
 
 function update(transaction) {
     showLoading();
-    firebase.firestore().collection("transactions").doc(getTransactionUid()).update(transaction).then(() => {
+    transactionService.update(transaction).then(() => {
         hideLoading();
         window.location.href = "../home/home.html";
     })
@@ -141,6 +141,10 @@ function isFormValid() {
         return false;
     }
     return true;
+}
+
+function cancelTransaction() {
+    window.location.href = "../home/home.html";
 }
 
 const form = {

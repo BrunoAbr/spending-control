@@ -77,11 +77,16 @@ input[type="radio"] {
     width: auto;
 }
 
+button {
+    cursor: pointer;
+}
+
 button:active {
     background-color: var(--primary-color-darker);
 }
 button:disabled {
        opacity: 0.3;
+       cursor: default;
 }
 
 button.fab {
