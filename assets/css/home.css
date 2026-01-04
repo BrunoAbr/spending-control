@@ -25,8 +25,19 @@ ol li.income {
     border-left: 8px solid green;
 }
 
+ol li:hover button.danger {
+    opacity: 1;
+}
+
 p {
     margin: 4px 0;
+}
+
+button.danger {
+    width: auto;
+    float: right;
+    cursor: pointer;
+    opacity: 0.1;
 }
 
 .clear {
