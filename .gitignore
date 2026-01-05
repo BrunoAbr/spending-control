@@ -1,2 +1,3 @@
 frontend/firebase-config.js
 node_modules/
+backend/serviceAccountKey.json
