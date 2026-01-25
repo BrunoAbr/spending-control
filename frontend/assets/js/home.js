@@ -8,8 +8,8 @@ function logout() {
 
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
-        user.getIdToken().then(token => {}); //DONT FORGET TO REMOVE THISSSSSS
-        findTransactions(user)
+        user.getIdToken().then(token => {console.log(user)}); //DONT FORGET TO REMOVE THISSSSSS
+        findTransactions(user);
     }
 })
 

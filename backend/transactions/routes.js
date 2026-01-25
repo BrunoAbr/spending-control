@@ -12,4 +12,11 @@ app.get('/',
     (request, response) => transactionController.findByUser(request, response)
 );
 
+app.get("/:uid",
+    (request, response, next) => authenticateToken(request, response, next, admin.auth() ), 
+    (request, response) => transactionController.findByUid(request, response)
+   
+
+);
+
 export const transactionsRouter = app;

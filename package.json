@@ -2,8 +2,9 @@
   "name": "projeto-spending-control",
   "version": "1.0.0",
   "description": "🚧 Projeto em desenvolvimento",
-  "main": "index.js",
+  "main": "backend/index.js",
   "scripts": {
+    "start": "node backend/index.js",
     "test": "jest",
     "test:dev": "jest --watch=true"
   },
