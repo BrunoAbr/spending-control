@@ -10,6 +10,8 @@ admin.initializeApp({
   credential: admin.credential.cert("backend/serviceAccountKey.json")
 });
 
+app.use(json());
+
 app.use('/transactions', transactionsRouter);
 
 app.listen(3000, () => console.log('API rest iniciada em http://localhost:3000'));

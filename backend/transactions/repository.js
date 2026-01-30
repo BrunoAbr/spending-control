@@ -14,4 +14,8 @@ export class TransactionRepository {
     findByUid(uid) {
         return admin.firestore().collection("transactions").doc(uid).get().then(snapshot => snapshot.data())
     }
+
+    save(transaction) {
+        return admin.firestore().collection("transaction").add(JSON.parse(JSON.stringify(transaction))).then(response => ({uid: response.id}));
+    }
 }
