@@ -29,4 +29,8 @@ export class TransactionRepository {
 
         })
     }
+
+    delete(transaction) {
+        return admin.firestore().collection("transactions").doc(transaction.uid).delete();
+    }
 }

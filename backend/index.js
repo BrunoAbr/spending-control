@@ -1,7 +1,5 @@
-import express from 'express';
+import express, {json} from 'express';
 import admin from 'firebase-admin';
-import { authenticateToken } from './middlewares/authenticate-jwt.js';
-import { TransactionController } from './transactions/controller.js';
 import { transactionsRouter } from './transactions/routes.js';
 
 const app = express();
