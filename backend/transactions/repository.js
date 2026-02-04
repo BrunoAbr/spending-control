@@ -10,6 +10,26 @@ export class TransactionRepository {
                 }))
             })
     }
+
+    findByUserAndMonth(uid, year, month) {
+
+        return admin.firestore().collection('transactions')
+            .where('user.uid', '==', uid)
+            .orderBy('date', 'desc') // ainda funciona para strings ISO
+            .get()
+            .then(snapshot => {
+            const transactions = snapshot.docs.map(doc => ({
+                ...doc.data(),
+                uid: doc.id
+            }));
+
+            // filtra pelo mês/ano
+            return transactions.filter(t => {
+                const [y, m] = t.date.split('-').map(Number);
+                return y === year && m === month;
+            });
+            });
+        }
     
     findByUid(uid) {
         return admin.firestore().collection("transactions").doc(uid).get().then(snapshot => snapshot.data())

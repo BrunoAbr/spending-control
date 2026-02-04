@@ -19,6 +19,20 @@ export class TransactionController {
         })
     }
 
+    findByUserAndMonth(request, response) {
+        const { year, month } = request.params;
+
+        const transaction = new Transaction();
+        transaction.user = request.user;
+
+        this.#transaction.findByUserAndMonth(Number(year), Number(month)).then(transactions => {
+            response.json(transactions);
+        }).catch(error => {
+            response.status(error.code).json(error);
+        })
+        
+    }
+
     findByUid(request, response) {
         this.#transaction.uid = request.params.uid;
         this.#transaction.user = request.user;

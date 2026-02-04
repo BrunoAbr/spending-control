@@ -16,9 +16,13 @@ app.get('/',
 app.get("/:uid",
     (request, response, next) => authenticateToken(request, response, next, admin.auth() ), 
     (request, response) => transactionController.findByUid(request, response)
-   
 
 );
+
+app.get("/:year/:month",
+    (request, response, next) => authenticateToken(request, response, next, admin.auth() ),     
+    (request, response) => transactionController.findByUserAndMonth(request, response)
+)
 
 app.post("/",
     (request, response, next) => validateTransaction(request, response, next, admin.auth() ), 
