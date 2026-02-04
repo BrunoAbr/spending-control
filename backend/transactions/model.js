@@ -20,11 +20,39 @@ export class Transaction {
     }
 
     findByUser() {
-        if(!this.user?.uid) {
+        if (!this.user?.uid) {
             return Promise.reject(new UserNotInformedError())
         }
-        return this.#repository.findByUserUid(this.user.uid);
-    }
+
+        return this.#repository.findByUserUid(this.user.uid)
+            .then(transactions => {
+
+            const summary = {
+                income: 0,
+                expense: 0,
+                balance: 0
+            }
+            for (const t of transactions) {
+
+                const value = t.money?.value || 0
+
+                if (t.type === 'income') {
+                summary.income += value
+                }
+
+                if (t.type === 'expense') {
+                summary.expense += value
+                }
+            }
+
+            summary.balance = summary.income - summary.expense
+
+            return {
+                transactions,
+                summary
+            }
+            })
+        }
 
     findByUid() {
         if(!this.uid){
