@@ -8,7 +8,7 @@ function logout() {
 
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
-        user.getIdToken().then(token => {console.log(user)}); //DONT FORGET TO REMOVE THISSSSSS
+        user.getIdToken().then(token => {}); 
         findTransactions(user);
     }
 })
@@ -19,9 +19,11 @@ function newTransaction() {
 
 function findTransactions(user) {
     showLoading();
-    transactionService.findByUser(user).then(transactions => {
-       hideLoading();
-       addTransactionsToScreen(transactions);
+    const [selectDateYear, selectDateMonth] = selectDate()
+    transactionService.findByUserAndMonth(selectDateYear, selectDateMonth).then(transactions => {
+        hideLoading();
+        addTransactionsToScreen(transactions.transactions);
+        addSummaryValueToScreen(transactions.summary);
     }).catch(error => {
         hideLoading();
         console.log(error);
@@ -29,6 +31,8 @@ function findTransactions(user) {
     }
     )
 }
+
+
 
 function addTransactionsToScreen(transactions) {
     const orderedList = document.getElementById('transactions');
@@ -90,7 +94,7 @@ function removeTransaction(transaction) {
     showLoading();
     transactionService.remove(transaction).then(() => {
         hideLoading();
-        document.getElementById(transaction.uid).remove();
+        document.getElementById(transaction.transactions.uid).remove();
     }).catch(error => {
         hideLoading();
         console.log(error);
@@ -104,4 +108,34 @@ function formatMoney(money) {
 
 function formatDate(date) {
     return new Date(date).toLocaleDateString('pt-br', {timeZone: 'UTC'});
+}
+
+function onChangeDate() {
+    findTransactions();
+}
+
+function selectDate() {
+    cleanTransactionToScreen()
+    const selectedDate = document.querySelector("input[type='month']").value;
+    const [selectDateYear, selectDateMonth] = selectedDate.split("-");
+    return [selectDateYear, selectDateMonth];
+}
+
+function cleanTransactionToScreen() {
+    const ol = document.getElementById("transactions");
+    ol.innerHTML = "";
+}
+
+
+
+function addSummaryValueToScreen(summary) {
+    const income = document.getElementById("income-value").textContent = `R$ ${formatToMoney(summary.income)}`;
+    const expense = document.getElementById("expense-value").textContent = `R$ ${formatToMoney(summary.expense)}`;
+    const balance = document.getElementById("balance-value").textContent = `R$ ${formatToMoney(summary.balance)}`;
+    console.log(summary)
+}
+
+function formatToMoney(value) {
+    const money = value.toLocaleString('pt-br', {minimumFractionDigits: 2});
+    return money
 }

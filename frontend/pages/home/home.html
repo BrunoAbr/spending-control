@@ -19,7 +19,14 @@
     <header>
         <button type="button" class="clear" onclick="logout()">Logout</button>
     </header>
+    <section class="container" id="summary-value">
+        <div id="income-value">R$ 00.00</div>
+        <div id="expense-value">R$ 00.00</div>
+        <div id="balance-value">R$ 00.00</div>
+    </section>
     <section class="container">
+        <input id="date-selector" type="month" value="2026-02" required>
+        <button id="filter-button" onclick="onChangeDate()">Filtrar</button>
         <ol id="transactions"></ol>
     </section>
     <button class="fab fixed bottom right" onclick="newTransaction()">+</button>    

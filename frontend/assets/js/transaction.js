@@ -1,7 +1,11 @@
-if (!isNewTransaction()) {
-    const uid = getTransactionUid();
-    findTransactionByUid(uid);
-}
+firebase.auth().onAuthStateChanged(user => {
+    if (user){
+        if (!isNewTransaction()) {
+            const uid = getTransactionUid();
+            findTransactionByUid(uid);
+        }
+    }
+})
 
 function getTransactionUid() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -15,20 +19,22 @@ function isNewTransaction() {
 function findTransactionByUid(uid) {
     showLoading();
 
-    transactionService.findByUid(uid).then(transaction => {
-        hideLoading();
-        if (transaction) {
-            fillTransactionScreen(transaction);
-            toggleSaveButtonDisable();
-        } else {
-            alert("Documento não encontrado");
+    transactionService.findByUid(uid)
+        .then(transaction => {
+            hideLoading();
+            if (transaction) {
+                fillTransactionScreen(transaction);
+                toggleSaveButtonDisable();
+            } else {
+                alert("Documento nao encontrado");
+                window.location.href = "../home/home.html";
+            }
+        })
+        .catch(() => {
+            hideLoading();
+            alert("Erro ao recuperar documento");
             window.location.href = "../home/home.html";
-        }
-    }). catch(() => {
-        hideLoading();
-        alert("Erro ao recuperar documento");
-        window.location.href = "../home/home.html";
-    });
+        });
 }
 
 function fillTransactionScreen(transaction) {
@@ -48,41 +54,41 @@ function fillTransactionScreen(transaction) {
     }
 }
 
-
-
 function saveTransaction() {
-    
-
     const transaction = createTransaction();
+
     if (isNewTransaction()) {
         save(transaction);
     } else {
         update(transaction);
     }
-    
-    
 }
 
 function save(transaction) {
     showLoading();
-    transactionService.save(transaction).then (() => {
-        hideLoading();
-        window.location.href = "../home/home.html";
-    }). catch(() => {
-        hideLoading();
-        alert("Erro ao salvar transação")
-    }).catch(() => {
-        hideLoading();
-        alert("Erro ao atualizar transação");
-    });
+
+    transactionService.save(transaction)
+        .then(() => {
+            hideLoading();
+            window.location.href = "../home/home.html";
+        })
+        .catch(() => {
+            hideLoading();
+            alert('Erro ao salvar transaçao');
+        })
 }
 
 function update(transaction) {
     showLoading();
-    transactionService.update(transaction).then(() => {
-        hideLoading();
-        window.location.href = "../home/home.html";
-    })
+    transactionService.update(transaction)
+        .then(() => {
+            hideLoading();
+            window.location.href = "../home/home.html";
+        })
+        .catch(() => {
+            hideLoading();
+            alert('Erro ao atualizar transaçao');
+        });
 }
 
 function createTransaction() {
@@ -97,13 +103,15 @@ function createTransaction() {
         description: form.description().value,
         user: {
             uid: firebase.auth().currentUser.uid
-        }
+        },
+        uid: getTransactionUid()
     };
 }
 
 function onChangeDate() {
     const date = form.date().value;
     form.dateRequiredError().style.display = !date ? "block" : "none";
+
     toggleSaveButtonDisable();
 }
 
@@ -112,12 +120,14 @@ function onChangeValue() {
     form.valueRequiredError().style.display = !value ? "block" : "none";
 
     form.valueLessOrEqualToZeroError().style.display = value <= 0 ? "block" : "none";
+
     toggleSaveButtonDisable();
 }
 
 function onChangeTransactionType() {
     const transactionType = form.transactionType().value;
     form.transactionTypeRequiredError().style.display = !transactionType ? "block" : "none";
+
     toggleSaveButtonDisable();
 }
 
@@ -132,7 +142,7 @@ function isFormValid() {
     }
 
     const value = form.value().value;
-    if (!value || value <=0) {
+    if (!value || value <= 0) {
         return false;
     }
 
@@ -140,24 +150,21 @@ function isFormValid() {
     if (!transactionType) {
         return false;
     }
+
     return true;
 }
 
-function cancelTransaction() {
-    window.location.href = "../home/home.html";
-}
-
 const form = {
+    currency: () => document.getElementById('currency'),
     date: () => document.getElementById('date'),
+    description: () => document.getElementById('description'),
     dateRequiredError: () => document.getElementById('date-required-error'),
     saveButton: () => document.getElementById('save-button'),
-    value: () => document.getElementById('value'),
-    valueRequiredError: () => document.getElementById('value-required-error'),
-    valueLessOrEqualToZeroError: () => document.getElementById('value-less-or-equal-to-zero-error'),
     transactionType: () => document.getElementById('transaction-type'),
     transactionTypeRequiredError: () => document.getElementById('transaction-type-required-error'),
     typeExpense: () => document.getElementById('expense'),
     typeIncome: () => document.getElementById('income'),
-    currency: () => document.getElementById('currency'),
-    description: () => document.getElementById('description')
+    value: () => document.getElementById('value'),
+    valueRequiredError: () => document.getElementById('value-required-error'),
+    valueLessOrEqualToZeroError: () => document.getElementById('value-less-or-equal-to-zero-error')
 }

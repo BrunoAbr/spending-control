@@ -15,7 +15,7 @@ export class TransactionRepository {
 
         return admin.firestore().collection('transactions')
             .where('user.uid', '==', uid)
-            .orderBy('date', 'desc') // ainda funciona para strings ISO
+            .orderBy('date', 'desc')
             .get()
             .then(snapshot => {
             const transactions = snapshot.docs.map(doc => ({
@@ -23,7 +23,6 @@ export class TransactionRepository {
                 uid: doc.id
             }));
 
-            // filtra pelo mês/ano
             return transactions.filter(t => {
                 const [y, m] = t.date.split('-').map(Number);
                 return y === year && m === month;
@@ -36,7 +35,7 @@ export class TransactionRepository {
     }
 
     save(transaction) {
-        return admin.firestore().collection("transaction").add(JSON.parse(JSON.stringify(transaction))).then(response => ({uid: response.id}));
+        return admin.firestore().collection("transactions").add(JSON.parse(JSON.stringify(transaction))).then(response => ({uid: response.id}));
     }
 
     update(transaction) {
