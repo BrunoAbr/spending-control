@@ -108,6 +108,12 @@ function createTransaction() {
     };
 }
 
+function cancelTransaction() {
+    showLoading();
+    window.location.href = "../home/home.html";
+    hideLoading();
+}
+
 function onChangeDate() {
     const date = form.date().value;
     form.dateRequiredError().style.display = !date ? "block" : "none";
